@@ -5,6 +5,7 @@
   "release-type": "python",
   "packages": {
     ".": {
+      "changelog-path": "CHANGELOG.md",
       "pull-request-title-pattern": "chore(release): release ${version}"
     }
   }
