@@ -22,5 +22,6 @@ jobs:
       app-description: "Desktop app and CLI for transcribing YouTube or local audio/video sources"
       tag_name: ${{ needs.release.outputs.tag_name }}
       extra-pyinstaller-args: "--collect-data whisper"
-      publish-homebrew-cask: true
+      # Only stable releases go to the Homebrew tap; rc builds stay on the GitHub prerelease.
+      publish-homebrew-cask: ${{ needs.release.outputs.release_channel != 'rc' }}
     secrets: inherit
