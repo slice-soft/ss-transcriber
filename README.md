@@ -40,7 +40,7 @@ crashes the process (`SIGKILL`) on larger Whisper models — CPU is slower but r
 
 ## Install
 
-### Homebrew (macOS)
+### Homebrew (macOS, Apple Silicon)
 
 ```
 brew tap slice-soft/homebrew-tap
@@ -48,6 +48,9 @@ brew install --cask transcriber
 ```
 
 This installs the `transcriber` command plus a GUI app in `/Applications`.
+
+Intel Macs are not supported by the prebuilt app: current PyTorch and numba ship no
+macOS x86_64 wheels. On an Intel Mac, install from source.
 
 ### From source
 
@@ -92,14 +95,18 @@ two-stage flow, because releases build real desktop artifacts (macOS/Linux/Windo
 binaries, a macOS `.app`, and a Homebrew Cask) that deserve a QA pass before going out
 as stable:
 
-1. Feature branches merge into `release` (squash merge).
-2. Every push to `release` cuts a **prerelease**, e.g. `v0.2.0-rc.1`, and builds/attaches
-   desktop artifacts to a draft GitHub release.
-3. After testing those artifacts, run the **Promote Release** workflow — it opens a PR
-   from `release` into `main`.
-4. Merging that PR triggers the **stable** release (e.g. `v0.2.0`), rebuilds the
-   artifacts, and updates the Homebrew Cask in
-   [`slice-soft/homebrew-tap`](https://github.com/slice-soft/homebrew-tap).
+1. Feature branches (`feature/<issue>-desc`, `fix/<issue>-desc`, ...) merge into
+   `release` with **squash**. PR titles are Conventional Commits ending in `(#<issue>)`.
+2. release-please opens an rc PR on `release`. Merging it publishes a **prerelease**
+   (e.g. `v0.2.0-rc`) and attaches the desktop artifacts (macOS arm64, Linux, Windows)
+   to that GitHub prerelease. The Homebrew Cask is **not** touched for rc builds.
+3. After testing those artifacts, open a PR from `release` into `main` and merge it
+   with a **merge commit** (the only method `main` allows), so `release` stays an
+   ancestor of `main`.
+4. release-please opens the stable release PR on `main`. Merging it publishes the
+   **stable** release (e.g. `v0.2.0`), rebuilds the artifacts and updates the Homebrew
+   Cask in [`slice-soft/homebrew-tap`](https://github.com/slice-soft/homebrew-tap).
+5. Fast-forward `release` to `main` so the next cycle starts from the stable state.
 
 The build/publish pipeline lives in
 [`slice-soft/ss-pipeline`](https://github.com/slice-soft/ss-pipeline) and is shared
