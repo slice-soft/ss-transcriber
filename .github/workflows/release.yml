@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+      - release
+
+jobs:
+  release:
+    uses: slice-soft/ss-pipeline/.github/workflows/create-release.yml@v0
+    with:
+      release_strategy: rc
+    secrets: inherit
+
+  build-artifacts:
+    needs: release
+    if: needs.release.outputs.releases_created == 'true'
+    uses: slice-soft/ss-pipeline/.github/workflows/release-desktop-python.yml@v0
+    with:
+      app-name: transcriber
+      app-description: "Desktop app and CLI for transcribing YouTube or local audio/video sources"
+      tag_name: ${{ needs.release.outputs.tag_name }}
+      extra-pyinstaller-args: "--collect-data whisper"
+      publish-homebrew-cask: true
+    secrets: inherit

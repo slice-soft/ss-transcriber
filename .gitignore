@@ -1,0 +1,30 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.spec
+
+# macOS
+.DS_Store
+
+# Large media files
+*.mp3
+*.wav
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.webm
+*.m4a
+*.aac
+*.flac
+
+# Whisper model cache
+~/.cache/whisper/
+
+# Legacy web app data (not used)
+data/

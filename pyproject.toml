@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ss-transcriber"
+version = "0.1.0"
+description = "YouTube and local video/audio transcription desktop app and CLI"
+requires-python = ">=3.10"
+dependencies = [
+    "PySide6",
+    "openai-whisper",
+    "torch",
+    "yt-dlp",
+]
+
+[project.scripts]
+transcriber = "ss_transcriber.cli:main"
+ss-transcriber = "ss_transcriber.cli:main"
+
+[project.gui-scripts]
+ss-transcriber-gui = "ss_transcriber.gui:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ss_transcriber*"]

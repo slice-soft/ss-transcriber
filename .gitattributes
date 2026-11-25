@@ -1,0 +1,5 @@
+* text=auto eol=lf
+
+# Changelogs are append-mostly: union merge so release -> main never conflicts on them.
+CHANGELOG.md    merge=union
+CHANGELOG-rc.md merge=union
