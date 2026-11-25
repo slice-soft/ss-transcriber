@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1-rc.1](https://github.com/slice-soft/ss-transcriber/compare/v0.1.1-rc...v0.1.1-rc.1) (2026-11-25)
+
+
+### Documentation
+
+* document Apple Silicon-only macOS builds and the current release flow ([#7](https://github.com/slice-soft/ss-transcriber/issues/7)) ([c5bfd0c](https://github.com/slice-soft/ss-transcriber/commit/c5bfd0ceedb76510a12bb82cb0f769fa9003b07d))
+
 ## [0.1.1-rc](https://github.com/slice-soft/ss-transcriber/compare/v0.1.0...v0.1.1-rc) (2026-11-25)
 
 
